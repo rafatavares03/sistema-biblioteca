@@ -13,6 +13,16 @@ import java.sql.Statement;
 
 public class Database {
     private Connection connection  = null;
+    private static Database uniqueInstance = null;
+
+    private Database() {}
+
+    public static Database getInstance() {
+        if(uniqueInstance == null) {
+            uniqueInstance = new Database();
+        }
+        return uniqueInstance;
+    }
 
     public void connect() {
         Dotenv dotenv = Dotenv.load();
