@@ -1,8 +1,7 @@
-package org.example.model.database;
+package org.example.data;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,7 +32,6 @@ public class Database {
             this.connection = DriverManager.getConnection(jdbcURL, username, password);
             createDomains(this.connection);
             createTables(this.connection);
-            System.out.println("Conectado com o banco de dados!");
         } catch(SQLException e) {
             System.out.println(e);
         }
@@ -43,7 +41,6 @@ public class Database {
         if(this.connection != null) {
             try {
                 connection.close();
-                System.out.println("Desconectado do banco de dados!");
             } catch (SQLException e) {
                 System.out.println(e);
             }

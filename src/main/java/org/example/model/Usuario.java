@@ -1,6 +1,6 @@
 package org.example.model;
 
-abstract class Usuario {
+public abstract class Usuario {
     private String cpf;
     private String nome;
     private String email;

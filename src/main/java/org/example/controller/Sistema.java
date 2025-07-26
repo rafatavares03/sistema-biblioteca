@@ -1,0 +1,32 @@
+package org.example.controller;
+
+import org.example.data.Database;
+import org.example.view.Login;
+import org.example.view.Pagina;
+import org.example.view.Paginas;
+import org.example.view.Registrar;
+
+import java.sql.Connection;
+
+public class Sistema {
+    Pagina[] paginas = new Pagina[Paginas.values().length];
+    private final Database db = Database.getInstance();
+
+    public Sistema() {
+        paginas[Paginas.LOGIN.ordinal()] = new Login();
+        paginas[Paginas.REGISTRAR.ordinal()] = new Registrar();
+        paginas[Paginas.SAIR.ordinal()] = null;
+    }
+    public void start() {
+        db.connect();
+        System.out.println("Bem vindo ao sistema da biblioteca!");
+        int paginaAtual = Paginas.LOGIN.ordinal();
+        while(paginas[paginaAtual] != null) {
+            paginaAtual = paginas[paginaAtual].executePage().ordinal();
+        }
+        db.disconnect();
+    }
+    Connection getDBConnection() {
+        return db.getConnection();
+   }
+}
