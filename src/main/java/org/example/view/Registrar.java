@@ -1,5 +1,6 @@
 package org.example.view;
 
+import org.example.controller.GerenciadorDeUsuario;
 import org.example.model.Estudante;
 
 import java.util.Arrays;
@@ -35,8 +36,12 @@ public class Registrar implements Pagina{
             //return false;
         }
         Estudante novoEstudante = new Estudante(cpf, nome, email);
-        System.out.println(novoEstudante);
-        System.out.println(cpf + " " + email + " " + nome + " " + Arrays.toString(senha));
+        boolean sucesso = GerenciadorDeUsuario.criaUsuario(novoEstudante, senha);
+        if(sucesso) {
+            System.out.println("Usuario cadastrado com sucesso!");
+        } else {
+            System.out.println("Infelizmente não foi possível cadastrar o usuário.");
+        }
         //return true;
         return Paginas.LOGIN;
     }

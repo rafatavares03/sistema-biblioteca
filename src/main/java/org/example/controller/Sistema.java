@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.data.Database;
+import org.example.model.Usuario;
 import org.example.view.Login;
 import org.example.view.Pagina;
 import org.example.view.Paginas;
@@ -10,7 +11,8 @@ import java.sql.Connection;
 
 public class Sistema {
     Pagina[] paginas = new Pagina[Paginas.values().length];
-    private final Database db = Database.getInstance();
+    public static Usuario usuario = null;
+    private static final Database db = Database.getInstance();
 
     public Sistema() {
         paginas[Paginas.LOGIN.ordinal()] = new Login();
@@ -26,7 +28,7 @@ public class Sistema {
         }
         db.disconnect();
     }
-    Connection getDBConnection() {
+    public static Connection getDBConnection() {
         return db.getConnection();
    }
 }
