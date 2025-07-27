@@ -9,4 +9,8 @@ public class GerenciadorDeUsuario {
     public static boolean criaUsuario(Usuario user, char[] password) {
         return userDAO.create(user, password);
     }
+
+    public static boolean autenticaUsuario(String key, char[] password) {
+        return userDAO.authenticate(key, password);
+    }
 }

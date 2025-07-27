@@ -24,7 +24,7 @@ public class Login implements Pagina{
         }
         switch(selected){
             case 1:
-                System.out.println("Opção de entrar escolhida");
+                proximaPagina = Paginas.ENTRAR;
                 break;
             case 2:
                 proximaPagina = Paginas.REGISTRAR;

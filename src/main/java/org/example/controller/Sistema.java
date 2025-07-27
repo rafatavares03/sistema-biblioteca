@@ -2,10 +2,7 @@ package org.example.controller;
 
 import org.example.data.Database;
 import org.example.model.Usuario;
-import org.example.view.Login;
-import org.example.view.Pagina;
-import org.example.view.Paginas;
-import org.example.view.Registrar;
+import org.example.view.*;
 
 import java.sql.Connection;
 
@@ -17,6 +14,8 @@ public class Sistema {
     public Sistema() {
         paginas[Paginas.LOGIN.ordinal()] = new Login();
         paginas[Paginas.REGISTRAR.ordinal()] = new Registrar();
+        paginas[Paginas.ENTRAR.ordinal()] = new Entrar();
+        paginas[Paginas.MENU_PRINCIPAL.ordinal()] = new MenuPrincipal();
         paginas[Paginas.SAIR.ordinal()] = null;
     }
     public void start() {
