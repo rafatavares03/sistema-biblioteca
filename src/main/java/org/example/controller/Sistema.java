@@ -8,15 +8,17 @@ import java.sql.Connection;
 
 public class Sistema {
     Pagina[] paginas = new Pagina[Paginas.values().length];
-    public static Usuario usuario = null;
+    private static Usuario user = null;
     private static final Database db = Database.getInstance();
 
     public Sistema() {
         paginas[Paginas.LOGIN.ordinal()] = new Login();
         paginas[Paginas.REGISTRAR.ordinal()] = new Registrar();
         paginas[Paginas.ENTRAR.ordinal()] = new Entrar();
+        paginas[Paginas.SAIR.ordinal()] = new Sair();
         paginas[Paginas.MENU_PRINCIPAL.ordinal()] = new MenuPrincipal();
-        paginas[Paginas.SAIR.ordinal()] = null;
+        paginas[Paginas.PERFIL.ordinal()] = new Perfil();
+        paginas[Paginas.ENCERRAR.ordinal()] = null;
     }
     public void start() {
         db.connect();
@@ -29,5 +31,16 @@ public class Sistema {
     }
     public static Connection getDBConnection() {
         return db.getConnection();
+   }
+   public static Usuario getUser() {
+        return user;
+   }
+
+   public static void signIn(Usuario usuario) {
+        user = usuario;
+   }
+
+   public static void signOut() {
+        user = null;
    }
 }

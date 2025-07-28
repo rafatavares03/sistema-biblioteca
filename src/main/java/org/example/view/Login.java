@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 public class Login implements Pagina{
     public Paginas executePage() {
-        Paginas proximaPagina = Paginas.SAIR;
-        System.out.println(
-                "Entre ou crie uma conta:\n" +
-                "1 - Entrar\n" +
-                "2 - Registrar\n" +
-                "3 - Sair"
+        Paginas proximaPagina = Paginas.ENCERRAR;
+        System.out.print(
+                """     
+                Entre ou crie uma conta:
+                1 - ENTRAR
+                2 - REGISTRAR
+                3 - ENCERRAR
+                """
         );
         Scanner scanner = new Scanner(System.in);
         int selected;

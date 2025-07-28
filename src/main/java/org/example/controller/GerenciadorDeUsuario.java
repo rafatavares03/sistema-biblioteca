@@ -4,8 +4,7 @@ import org.example.data.UsuarioDAO;
 import org.example.model.Usuario;
 
 public class GerenciadorDeUsuario {
-    private static Usuario user = null;
-    private static UsuarioDAO userDAO = new UsuarioDAO();
+    private static final UsuarioDAO userDAO = new UsuarioDAO();
 
     public static boolean criaUsuario(Usuario user, char[] password) {
         return userDAO.create(user, password);
@@ -17,13 +16,5 @@ public class GerenciadorDeUsuario {
 
     public static Usuario buscaUsuario(String key) {
         return userDAO.read(key);
-    }
-
-    public static void setUser(Usuario usuario) {
-        user = usuario;
-    }
-
-    public static Usuario getUser() {
-        return user;
     }
 }
