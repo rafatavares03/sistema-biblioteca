@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.GerenciadorDeUsuario;
+import org.example.model.Admin;
 
 import java.util.Scanner;
 
@@ -14,6 +15,8 @@ public class Entrar implements Pagina{
         char[] senha = scanner.nextLine().toCharArray();
         boolean sucesso = GerenciadorDeUsuario.autenticaUsuario(cpf, senha);
         if(sucesso) {
+            GerenciadorDeUsuario.setUser(GerenciadorDeUsuario.buscaUsuario(cpf));
+            System.out.println(GerenciadorDeUsuario.getUser() instanceof Admin);
             System.out.println("Login realizado com sucesso.");
             proximaPagina = Paginas.MENU_PRINCIPAL;
         } else {

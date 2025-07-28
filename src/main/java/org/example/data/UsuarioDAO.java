@@ -6,6 +6,7 @@ import org.example.model.Usuario;
 import org.example.controller.Sistema;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -34,8 +35,35 @@ public class UsuarioDAO{
     }
 
     public Usuario read(String key) {
-        System.out.println("read");
-        return new Estudante("123","456", "789");
+        Usuario user = null;
+        String sql = String.format(
+                """
+                SELECT *
+                FROM usuario AS u
+                WHERE u.cpf = '%s'
+                """,
+                key
+        );
+        try(Statement stm = connection.createStatement()) {
+            boolean queryResult = stm.execute(sql);
+            if(queryResult) {
+                ResultSet rs = stm.getResultSet();
+                if(rs.next()) {
+                    String cpf = rs.getString("cpf");
+                    String nome = rs.getString("nome");
+                    String email = rs.getString("email");
+                    boolean admin = rs.getBoolean("admin");
+                    if(admin) {
+                        user = new Admin(cpf, nome, email);
+                    } else {
+                        user = new Estudante(cpf, nome, email);
+                    }
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+        return user;
     }
 
     public boolean update(Usuario user) {
