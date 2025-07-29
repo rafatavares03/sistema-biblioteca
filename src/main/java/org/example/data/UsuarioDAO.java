@@ -90,7 +90,13 @@ public class UsuarioDAO{
                 String.valueOf(password), key
         );
         try(Statement stm = connection.createStatement()) {
-            success = stm.execute(sql);
+            boolean statementExecuted = stm.execute(sql);
+            if(statementExecuted) {
+                ResultSet rs = stm.getResultSet();
+                if(rs.next()) {
+                    success = rs.getBoolean("senha_match");
+                }
+            }
         } catch(SQLException e) {
             System.out.println(e);
         }

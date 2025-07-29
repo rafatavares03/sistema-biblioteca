@@ -18,7 +18,7 @@ public class Login implements Pagina{
         int selected;
         try {
             selected = scanner.nextInt();
-        } catch (InputMismatchException e) {
+        } catch (Exception e) {
             selected = 0;
         }
         switch(selected){

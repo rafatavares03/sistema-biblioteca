@@ -19,7 +19,7 @@ public class MenuPrincipal implements Pagina {
     }
 
     private Paginas adminPage() {
-        Paginas proximaPagina = Paginas.MENU_PRINCIPAL;
+        Paginas proximaPagina = null;
         Scanner scanner = new Scanner(System.in);
         System.out.print(
               """
@@ -35,24 +35,35 @@ public class MenuPrincipal implements Pagina {
               9 - SAIR
              """
         );
-        int selected = scanner.nextInt();
-        proximaPagina = switch (selected) {
-            case 1 -> Paginas.PERFIL;
-            case 2 -> Paginas.LOCACOES_SOLICITADAS;
-            case 3 -> Paginas.LOCACOES_REGISTRO;
-            case 4 -> Paginas.ALUGAR_LIVRO;
-            case 5 -> Paginas.ADICIONAR_LIVRO;
-            case 6 -> Paginas.EDITAR_LIVRO;
-            case 7 -> Paginas.REMOVER_LIVRO;
-            case 8 -> Paginas.CADASTRAR_ADMIN;
-            case 9 -> Paginas.SAIR;
-            default -> proximaPagina;
-        };
+        int selected;
+        do {
+            try{
+                selected = scanner.nextInt();
+            } catch(Exception e) {
+                System.out.println(e);
+                selected = 0;
+            }
+            proximaPagina = switch (selected) {
+                case 1 -> Paginas.PERFIL;
+                case 2 -> Paginas.LOCACOES_SOLICITADAS;
+                case 3 -> Paginas.LOCACOES_REGISTRO;
+                case 4 -> Paginas.ALUGAR_LIVRO;
+                case 5 -> Paginas.ADICIONAR_LIVRO;
+                case 6 -> Paginas.EDITAR_LIVRO;
+                case 7 -> Paginas.REMOVER_LIVRO;
+                case 8 -> Paginas.CADASTRAR_ADMIN;
+                case 9 -> Paginas.SAIR;
+                default -> null;
+            };
+            if(proximaPagina == null) {
+                System.out.println("A opção escolhida é inválida.");
+            }
+        } while(proximaPagina == null);
         return proximaPagina;
     }
 
     private Paginas regularUserPage() {
-        Paginas proximaPagina = Paginas.MENU_PRINCIPAL;
+        Paginas proximaPagina = null;
         Scanner scanner = new Scanner(System.in);
         System.out.print(
               """
@@ -62,13 +73,23 @@ public class MenuPrincipal implements Pagina {
               3 - SAIR
              """
         );
-        int selected = scanner.nextInt();
-        proximaPagina = switch (selected) {
-            case 1 -> Paginas.PERFIL;
-            case 2 -> Paginas.ALUGAR_LIVRO;
-            case 3 -> Paginas.SAIR;
-            default -> proximaPagina;
-        };
+        int selected;
+        do {
+            try{
+                selected = scanner.nextInt();
+            } catch (Exception e) {
+                selected = 0;
+            }
+            proximaPagina = switch (selected) {
+                case 1 -> Paginas.PERFIL;
+                case 2 -> Paginas.ALUGAR_LIVRO;
+                case 3 -> Paginas.SAIR;
+                default -> null;
+            };
+            if(proximaPagina == null) {
+                System.out.println("A opção escolhida é inválida.");
+            }
+        } while(proximaPagina == null);
         return proximaPagina;
     }
 }
