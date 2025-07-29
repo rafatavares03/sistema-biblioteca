@@ -1,6 +1,5 @@
 package org.example.view;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Login implements Pagina{

@@ -18,6 +18,7 @@ public class Sistema {
         paginas[Paginas.SAIR.ordinal()] = new Sair();
         paginas[Paginas.MENU_PRINCIPAL.ordinal()] = new MenuPrincipal();
         paginas[Paginas.PERFIL.ordinal()] = new Perfil();
+        paginas[Paginas.CADASTRAR_ADMIN.ordinal()] = new CadastrarAdmin();
         paginas[Paginas.ENCERRAR.ordinal()] = null;
     }
     public void start() {

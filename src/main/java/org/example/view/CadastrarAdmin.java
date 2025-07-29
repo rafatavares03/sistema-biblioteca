@@ -1,13 +1,11 @@
 package org.example.view;
 
 import org.example.controller.GerenciadorDeUsuario;
-import org.example.model.Estudante;
+import org.example.model.Admin;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Registrar implements Pagina{
-    @Override
+public class CadastrarAdmin implements Pagina{
     public Paginas executePage() {
         System.out.println("Preencha as seguintes informações.");
         System.out.printf("CPF: ");
@@ -36,13 +34,13 @@ public class Registrar implements Pagina{
             System.out.println("A senha deve conter entre 8 a 20 caracteres.");
             return Paginas.LOGIN;
         }
-        Estudante novoEstudante = new Estudante(cpf, nome, email);
-        boolean sucesso = GerenciadorDeUsuario.criaUsuario(novoEstudante, senha);
+        Admin novoAdmin = new Admin(cpf, nome, email);
+        boolean sucesso = GerenciadorDeUsuario.criaUsuario(novoAdmin, senha);
         if(sucesso) {
-            System.out.println("Usuario cadastrado com sucesso!");
+            System.out.println("Administrador cadastrado com sucesso!");
         } else {
-            System.out.println("Infelizmente não foi possível cadastrar o usuário.");
+            System.out.println("Infelizmente não foi possível cadastrar o administrador.");
         }
-        return Paginas.LOGIN;
+        return Paginas.MENU_PRINCIPAL;
     }
 }

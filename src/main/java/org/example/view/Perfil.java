@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Perfil implements Pagina{
     @Override
     public Paginas executePage() {
-        Paginas proximaPagina = Paginas.MENU_PRINCIPAL;
+        Paginas proximaPagina = null;
         Scanner scanner = new Scanner(System.in);
         System.out.print(
                 """
@@ -19,9 +19,22 @@ public class Perfil implements Pagina{
                 5 - VOLTAR
                 """
         );
-        int selected = scanner.nextInt();
-        if(selected == 1) {
-            verDados();
+        int selected;
+        while(proximaPagina == null) {
+            try {
+                selected = scanner.nextInt();
+                scanner.nextLine();
+            } catch(Exception e) {
+                selected = 0;
+                scanner.nextLine();
+            }
+            switch (selected) {
+                case 1:
+                    verDados();
+                    break;
+                default:
+                    System.out.println("A opção escolhida é inválida.");
+            }
         }
         return proximaPagina;
     }

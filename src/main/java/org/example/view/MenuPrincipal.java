@@ -39,9 +39,10 @@ public class MenuPrincipal implements Pagina {
         do {
             try{
                 selected = scanner.nextInt();
+                scanner.nextLine();
             } catch(Exception e) {
-                System.out.println(e);
                 selected = 0;
+                scanner.nextLine();
             }
             proximaPagina = switch (selected) {
                 case 1 -> Paginas.PERFIL;
@@ -77,8 +78,10 @@ public class MenuPrincipal implements Pagina {
         do {
             try{
                 selected = scanner.nextInt();
+                scanner.nextLine();
             } catch (Exception e) {
                 selected = 0;
+                scanner.nextLine();
             }
             proximaPagina = switch (selected) {
                 case 1 -> Paginas.PERFIL;
