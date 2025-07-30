@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import org.example.data.UsuarioDAO;
+import org.example.model.Admin;
+import org.example.model.Estudante;
 import org.example.model.Usuario;
 
 public class GerenciadorDeUsuario {
@@ -16,5 +18,27 @@ public class GerenciadorDeUsuario {
 
     public static Usuario buscaUsuario(String key) {
         return userDAO.read(key);
+    }
+
+    public static boolean alteraUsuario(String attribute, String newValue) {
+        Usuario modified;
+        if(Sistema.user instanceof Admin) {
+            modified = new Admin(Sistema.user.getCpf(), Sistema.user.getNome(), Sistema.user.getEmail());
+        } else {
+            modified = new Estudante(Sistema.user.getCpf(), Sistema.user.getNome(), Sistema.user.getEmail());
+        }
+        switch (attribute) {
+            case "nome":
+                modified.setNome(newValue);
+                break;
+            case "email":
+                modified.setEmail(newValue);
+                break;
+        }
+        boolean updateSuccess = userDAO.update(modified);
+        if(updateSuccess) {
+            Sistema.user = modified;
+        }
+        return updateSuccess;
     }
 }

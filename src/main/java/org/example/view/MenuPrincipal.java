@@ -9,7 +9,7 @@ public class MenuPrincipal implements Pagina {
     @Override
     public Paginas executePage() {
         Paginas proximaPagina;
-        if(Sistema.getUser() instanceof Admin) {
+        if(Sistema.user instanceof Admin) {
             proximaPagina = adminPage();
         } else {
             proximaPagina = regularUserPage();

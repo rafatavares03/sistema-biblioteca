@@ -8,7 +8,7 @@ import java.sql.Connection;
 
 public class Sistema {
     Pagina[] paginas = new Pagina[Paginas.values().length];
-    private static Usuario user = null;
+    public static Usuario user = null;
     private static final Database db = Database.getInstance();
 
     public Sistema() {
@@ -32,9 +32,6 @@ public class Sistema {
     }
     public static Connection getDBConnection() {
         return db.getConnection();
-   }
-   public static Usuario getUser() {
-        return user;
    }
 
    public static void signIn(Usuario usuario) {
