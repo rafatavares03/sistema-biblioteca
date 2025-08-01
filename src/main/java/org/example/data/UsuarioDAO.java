@@ -45,8 +45,8 @@ public class UsuarioDAO{
                 key
         );
         try(Statement stm = connection.createStatement()) {
-            boolean queryResult = stm.execute(sql);
-            if(queryResult) {
+            boolean smtSuccess = stm.execute(sql);
+            if(smtSuccess) {
                 ResultSet rs = stm.getResultSet();
                 if(rs.next()) {
                     String cpf = rs.getString("cpf");
@@ -67,8 +67,25 @@ public class UsuarioDAO{
     }
 
     public boolean update(Usuario user) {
-        System.out.println("update");
-        return true;
+        boolean updateSucess = false;
+        String sql = String.format(
+                """
+                UPDATE usuario
+                SET nome = '%s', email = '%s'
+                WHERE cpf = '%s';
+                """,
+                user.getNome(), user.getEmail(), user.getCpf()
+        );
+        try(Statement smt = connection.createStatement()) {
+            smt.execute(sql);
+            int updated = smt.getUpdateCount();
+            if(updated == 1) {
+                updateSucess = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return updateSucess;
     }
 
     public boolean updatePassword(Usuario user, char[] password) {

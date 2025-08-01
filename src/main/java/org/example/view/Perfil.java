@@ -35,6 +35,14 @@ public class Perfil implements Pagina{
                 case 1:
                     verDados();
                     break;
+                case 2:
+                    boolean dadosAlterados = alterarDados();
+                    if(dadosAlterados) {
+                        System.out.println("Seus dados foram atualizados com sucesso.");
+                    } else {
+                        System.out.println("Infelizmente seus dados não puderam ser atualizados.");
+                    }
+                    break;
                 case 5:
                     proximaPagina = Paginas.MENU_PRINCIPAL;
                 default:
@@ -72,9 +80,15 @@ public class Perfil implements Pagina{
         boolean success = false;
         switch (selected){
             case 1:
-                System.out.println("Digite o nome: ");
+                System.out.print("Digite o nome: ");
                 String nome = scanner.nextLine();
                 success = GerenciadorDeUsuario.alteraUsuario("nome", nome);
+            case 2:
+                System.out.print("Digite o email: ");
+                String email = scanner.nextLine();
+                success = GerenciadorDeUsuario.alteraUsuario("email", email);
+            case 4:
+                break;
         }
         return success;
     }
