@@ -83,10 +83,20 @@ public class Perfil implements Pagina{
                 System.out.print("Digite o nome: ");
                 String nome = scanner.nextLine();
                 success = GerenciadorDeUsuario.alteraUsuario("nome", nome);
+                break;
             case 2:
                 System.out.print("Digite o email: ");
                 String email = scanner.nextLine();
                 success = GerenciadorDeUsuario.alteraUsuario("email", email);
+                break;
+            case 3:
+                System.out.println("Digite a senha atual: ");
+                char[] senha = scanner.nextLine().toCharArray();
+                if(GerenciadorDeUsuario.autenticaUsuario(Sistema.user.getCpf(), senha)) {
+                    System.out.println("Digite a nova senha: ");
+                    char[] novaSenha = scanner.nextLine().toCharArray();
+                    GerenciadorDeUsuario.alteraSenha(novaSenha);
+                }
             case 4:
                 break;
         }

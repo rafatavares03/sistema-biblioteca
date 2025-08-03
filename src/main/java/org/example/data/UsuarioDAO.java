@@ -24,7 +24,6 @@ public class UsuarioDAO{
                 """,
                 user.getCpf(), user.getNome(), user.getEmail(), user instanceof Admin, user.getCpf(), String.valueOf(password)
         );
-        System.out.println(sql);
         try(Statement stm = connection.createStatement()) {
             stm.execute(sql);
         } catch (SQLException e) {
@@ -67,7 +66,7 @@ public class UsuarioDAO{
     }
 
     public boolean update(Usuario user) {
-        boolean updateSucess = false;
+        boolean updateSuccess = false;
         String sql = String.format(
                 """
                 UPDATE usuario
@@ -80,16 +79,35 @@ public class UsuarioDAO{
             smt.execute(sql);
             int updated = smt.getUpdateCount();
             if(updated == 1) {
-                updateSucess = true;
+                updateSuccess = true;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return updateSucess;
+        return updateSuccess;
     }
 
     public boolean updatePassword(Usuario user, char[] password) {
-        return true;
+        boolean updateSuccess = false;
+        String sql = String.format(
+            """
+            UPDATE credenciais
+            SET senha = crypt('%s', gen_salt('md5'))
+            WHERE user_cpf = '%s';
+            """,
+            String.valueOf(password), user.getCpf()
+        );
+        System.out.println(sql);
+        try(Statement smt = connection.createStatement()) {
+            smt.execute(sql);
+            int updated = smt.getUpdateCount();
+            if(updated == 1) {
+                updateSuccess = true;
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return updateSuccess;
     }
 
     public boolean delete (String key) {

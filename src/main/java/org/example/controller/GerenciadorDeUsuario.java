@@ -8,6 +8,14 @@ import org.example.model.Usuario;
 public class GerenciadorDeUsuario {
     private static final UsuarioDAO userDAO = new UsuarioDAO();
 
+    private static Usuario tempUser() {
+        if(Sistema.user instanceof Admin) {
+            return new Admin(Sistema.user.getCpf(), Sistema.user.getNome(), Sistema.user.getEmail());
+        } else {
+            return new Estudante(Sistema.user.getCpf(), Sistema.user.getNome(), Sistema.user.getEmail());
+        }
+    }
+
     public static boolean criaUsuario(Usuario user, char[] password) {
         return userDAO.create(user, password);
     }
@@ -21,12 +29,7 @@ public class GerenciadorDeUsuario {
     }
 
     public static boolean alteraUsuario(String attribute, String newValue) {
-        Usuario modified;
-        if(Sistema.user instanceof Admin) {
-            modified = new Admin(Sistema.user.getCpf(), Sistema.user.getNome(), Sistema.user.getEmail());
-        } else {
-            modified = new Estudante(Sistema.user.getCpf(), Sistema.user.getNome(), Sistema.user.getEmail());
-        }
+        Usuario modified = tempUser();
         switch (attribute) {
             case "nome":
                 modified.setNome(newValue);
@@ -40,5 +43,9 @@ public class GerenciadorDeUsuario {
             Sistema.user = modified;
         }
         return updateSuccess;
+    }
+
+    public static boolean alteraSenha(char[] newPassword) {
+        return userDAO.updatePassword(Sistema.user, newPassword);
     }
 }
