@@ -24,6 +24,7 @@ public class Perfil implements Pagina{
         );
         int selected;
         do {
+            System.out.print("Escolha uma opção: ");
             try {
                 selected = scanner.nextInt();
                 scanner.nextLine();
@@ -90,15 +91,20 @@ public class Perfil implements Pagina{
                 success = GerenciadorDeUsuario.alteraUsuario("email", email);
                 break;
             case 3:
-                System.out.println("Digite a senha atual: ");
+                System.out.print("Digite a senha atual: ");
                 char[] senha = scanner.nextLine().toCharArray();
                 if(GerenciadorDeUsuario.autenticaUsuario(Sistema.user.getCpf(), senha)) {
-                    System.out.println("Digite a nova senha: ");
+                    System.out.print("Digite a nova senha: ");
                     char[] novaSenha = scanner.nextLine().toCharArray();
-                    GerenciadorDeUsuario.alteraSenha(novaSenha);
+                    success = GerenciadorDeUsuario.alteraSenha(novaSenha);
+                } else {
+                    System.out.println("A senha inserida não corresponde à senha atual.");
                 }
+                break;
             case 4:
                 break;
+            default:
+                System.out.println("A opção escolhida é inválida.");
         }
         return success;
     }

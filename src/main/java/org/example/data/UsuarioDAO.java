@@ -97,7 +97,6 @@ public class UsuarioDAO{
             """,
             String.valueOf(password), user.getCpf()
         );
-        System.out.println(sql);
         try(Statement smt = connection.createStatement()) {
             smt.execute(sql);
             int updated = smt.getUpdateCount();
